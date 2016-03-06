@@ -7,6 +7,7 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
+import android.os.Process;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 
@@ -42,8 +43,7 @@ public class HelloService extends Service {
     @Override
     public void onCreate() {
         // start thread running service
-        HandlerThread thread = new HandlerThread("ServiceStartArguments",
-                Process.THREAD_PRIORITY_BACKGROUNDS);
+        HandlerThread thread = new HandlerThread("ServiceStartArguments", Process.THREAD_PRIORITY_BACKGROUND);
         thread.start();
         // Get HandlerThread's looper
         mServiceLooper = thread.getLooper();
@@ -55,7 +55,7 @@ public class HelloService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this, "service starting", Toast.LENGTH_SHORT);
+        Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
         // for each request send a message to start a
         // job and deliver id
         Message msg = mServiceHandler.obtainMessage();
